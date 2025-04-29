@@ -38,9 +38,13 @@ Epd::~Epd() {
 
 Epd::Epd() {
     reset_pin = RST_PIN;
+    reset_pin1 = RST_PIN1;
     dc_pin = DC_PIN;
+    dc_pin1 = DC_PIN1;
     cs_pin = CS_PIN;
+    cs_pin1 = CS_PIN1;
     busy_pin = BUSY_PIN;
+    busy_pin1 = BUSY_PIN1;
     width = EPD_WIDTH;
     height = EPD_HEIGHT;
 };
@@ -150,6 +154,7 @@ int Epd::Init(void) {
  */
 void Epd::SendCommand(unsigned char command) {
     DigitalWrite(dc_pin, LOW);
+    DigitalWrite(dc_pin1, LOW);
     SpiTransfer(command);
 }
 
@@ -158,12 +163,16 @@ void Epd::SendCommand(unsigned char command) {
  */
 void Epd::SendData(unsigned char data) {
     DigitalWrite(dc_pin, HIGH);
+    DigitalWrite(dc_pin1, HIGH);
     SpiTransfer(data);
 }
 
 void Epd::EPD_7IN3F_BusyHigh(void)// If BUSYN=0 then waiting
 {
     while(!DigitalRead(BUSY_PIN)) {
+        DelayMs(1);
+    }
+    while(!DigitalRead(BUSY_PIN1)) {
         DelayMs(1);
     }
 }
@@ -175,10 +184,13 @@ void Epd::EPD_7IN3F_BusyHigh(void)// If BUSYN=0 then waiting
  */
 void Epd::Reset(void) {
     DigitalWrite(reset_pin, HIGH);
+    DigitalWrite(reset_pin1, HIGH);
     DelayMs(20);   
-    DigitalWrite(reset_pin, LOW);                //module reset    
+    DigitalWrite(reset_pin, LOW);  
+    DigitalWrite(reset_pin1, LOW);              //module reset    
     DelayMs(1);
     DigitalWrite(reset_pin, HIGH);
+    DigitalWrite(reset_pin1, HIGH);
     DelayMs(20);    
 }
 
@@ -293,6 +305,7 @@ void Epd::Sleep(void) {
     SendData(0xA5);
     DelayMs(10);
 	DigitalWrite(RST_PIN, 0); // Reset
+    DigitalWrite(RST_PIN1, 0); // Reset
 }
 
 

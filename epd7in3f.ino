@@ -24,7 +24,7 @@
    THE SOFTWARE.
 */
 
-#include <SPI.h>
+
 #include "imagedata.h"
 #include "epd7in3f.h"
 

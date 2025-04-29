@@ -50,13 +50,20 @@ void EpdIf::SpiTransfer(unsigned char data) {
     digitalWrite(CS_PIN, LOW);
     SPI.transfer(data);
     digitalWrite(CS_PIN, HIGH);
+    digitalWrite(CS_PIN1, HIGH);
+    SPI.transfer(data);
+    digitalWrite(CS_PIN1, LOW);
 }
 
 int EpdIf::IfInit(void) {
     pinMode(CS_PIN, OUTPUT);
+    pinMode(CS_PIN1, OUTPUT);
     pinMode(RST_PIN, OUTPUT);
+    pinMode(RST_PIN1, OUTPUT);
     pinMode(DC_PIN, OUTPUT);
+    pinMode(DC_PIN1, OUTPUT);
     pinMode(BUSY_PIN, INPUT); 
+    pinMode(BUSY_PIN1, INPUT);
     SPI.begin();
     SPI.beginTransaction(SPISettings(2000000, MSBFIRST, SPI_MODE0));
     
