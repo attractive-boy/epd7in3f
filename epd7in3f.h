@@ -73,9 +73,13 @@ public:
 
 private:
     unsigned int reset_pin;
+    unsigned int reset_pin1;
     unsigned int dc_pin;
+    unsigned int dc_pin1;
     unsigned int cs_pin;
+    unsigned int cs_pin1;
     unsigned int busy_pin;
+    unsigned int busy_pin1;
     unsigned long width;
     unsigned long height;
 };
