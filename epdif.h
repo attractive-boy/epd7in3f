@@ -36,10 +36,11 @@
 #define CS_PIN          10
 #define BUSY_PIN        9
 
-#define RST_PIN1         7
-#define DC_PIN1         8
-#define CS_PIN1         10
-#define BUSY_PIN1        9
+// Second EPD pin definition
+#define RST_PIN1        4
+#define DC_PIN1         5
+#define CS_PIN1         6
+#define BUSY_PIN1       3
 
 class EpdIf {
 public:
